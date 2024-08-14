@@ -75,6 +75,7 @@ class IpFailedLoginAttemptListDataTable extends DataTable
         return [
             Column::make('ip'),
             Column::make('status'),
+            Column::make('failed_attempt')->title('Total Gagal Login'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

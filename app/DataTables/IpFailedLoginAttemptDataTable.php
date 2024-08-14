@@ -81,7 +81,7 @@ class IpFailedLoginAttemptDataTable extends DataTable
     {
         Log::info('getcolumns');
         return [
-            Column::make('input_username'),
+            Column::make('input_username')->title('Input Email'),
             Column::make('ip'),
             Column::make('failed_attempt'),
             Column::make('created_at'),

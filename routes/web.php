@@ -6,8 +6,18 @@ use App\Http\Controllers\{
     HomeController,
     Admin\DashboardController
 };
+use App\Models\IpFailedLoginAttempt;
 
 Route::get('/', function () {
+    $ip = request()->ip();
+    $lastLoginAttemptFromThisIp = IpFailedLoginAttempt::whereIp($ip)->orderBy('created_at', 'desc')->first();
+
+    if($lastLoginAttemptFromThisIp) {
+        if((int)$lastLoginAttemptFromThisIp->failed_attempt >= 5){
+            return abort(403, 'Access Denied! Your IP has been BLOCKED due to a detected BRUTE FORCE ATTEMPT. To regain access, please CONTACT the administrator.');
+        }
+    }
+    
     return view('welcome');
 });
 
