@@ -10,7 +10,11 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        @if($failedCounter == 4)
+                            <div class="alert alert-danger" role="alert">
+                                You have entered incorrect login details 4 times. If you fail to log in correctly one more time, your IP address will be permanently blocked for security reasons. If you have forgotten your password, please use the "Forgot Password" feature to reset it before your next attempt.
+                            </div>
+                        @endif
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
